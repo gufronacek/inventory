@@ -52,7 +52,8 @@ class MasukController extends Controller
             'stok_awal' => 0,
             'jumlah' => $data['jumlah'],
             'tanggal' => Carbon::now()->format('Y-m-d H:i:s'),
-            'aksi' => 'masuk'
+            'aksi' => 'masuk',
+            'keterangan' => request()->input('keterangan')
         );
 
         if($stock_terakhir != null) {

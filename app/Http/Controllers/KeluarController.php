@@ -43,7 +43,8 @@ class KeluarController extends Controller
             'stok_awal' => $stock_terakhir->stok_awal + $stock_terakhir->jumlah,
             'jumlah' => 0 - $data['jumlah'],
             'tanggal' => Carbon::now()->format('Y-m-d H:i:s'),
-            'aksi' => 'keluar'
+            'aksi' => 'keluar',
+            'keterangan' => request()->input('keterangan')
         );
         aksi_stok::create($catatan);
 

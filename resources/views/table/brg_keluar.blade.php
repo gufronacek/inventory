@@ -26,6 +26,7 @@
                             <th>Stok Awal</th>
                             <th>Jumlah Keluar</th>
                             <th>Tanggal</th>
+                            <th>Keterangan</th>
                             {{-- <th>Aksi</th> --}}
                         </tr>
                     </thead>
@@ -37,6 +38,7 @@
                                 <td>{{ $item->stok_awal }}</td>
                                 <td>{{ $item->jumlah}}</td>
                                 <td>{{ $item->tanggal }}</td>
+                                <td>{{ $item->keterangan }}</td>
                                 {{-- <td>
                                     <button type="button" class="btn btn-success">Detail</button>
                                     <a href="/masuk/edit/{{  $item->id_masuk }}" type="button" class="btn btn-warning" data-toggle="modal" data-target="#myEdit{{ $item->id_masuk }}">Edit</a>
@@ -77,6 +79,10 @@
                                                 <input type="text" name="jumlah" class="form-control" id="jumlah"
                                                     placeholder="jumlah" required>
                                             </div>
+                                            <div class="form-group">
+                                                <label for="jumlah">keterangan</label>
+                                                <textarea name="keterangan" class="form-control" placeholder="Keterangan Jika Ada" id="" cols="30" rows="5"></textarea>
+                                            </div> 
                                             
                                         </div>
                                         <div class="col-6">

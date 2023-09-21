@@ -53,7 +53,7 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 
                 {{-- <a class="collapse-item" href="/barang">Barang</a> --}}
-                <a class="collapse-item" href="/stok">Stok Barang</a>
+                {{-- <a class="collapse-item" href="/stok">Stok Barang</a> --}}
                 <a class="collapse-item" href="/masuk">Barang Masuk</a>
                 <a class="collapse-item" href="/keluar">Barang Keluar</a>
             </div>
