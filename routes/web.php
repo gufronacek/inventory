@@ -40,14 +40,14 @@ Route::middleware('guest')->group(function(){
 Route::middleware('auth')->group(function(){
     Route::get('/', [HomeController::class, 'index']);
 
-    // Route::get('/barang', [BarangController::class, 'index']);
-    // Route::post('/barang', [BarangController::class, 'tambah']);
-    // Route::get('/barang/delete/{id_barang}', [BarangController::class, 'delete']);
-    // Route::get('/barang/edit/{id_barang}', [BarangController::class, 'edit']);
-    // Route::get('/barang/update/{id_barang}', [BarangController::class, 'update']);
+    Route::get('/barang', [BarangController::class, 'index']);
+    Route::post('/barang', [BarangController::class, 'tambah']);
+    Route::get('/barang/delete/{id_barang}', [BarangController::class, 'delete']);
+    Route::get('/barang/edit/{id_barang}', [BarangController::class, 'edit']);
+    Route::get('/barang/update/{id_barang}', [BarangController::class, 'update']);
 
     Route::get('/stok', [StockController::class, 'index']);
-    Route::post('/stok', [StockController::class, 'tambah']);
+    Route::post('/stok', [BarangController::class, 'tambah']);
     Route::get('/stok/edit/{id_stock}', [StockController::class, 'edit']);
     Route::post('/stok/update/{id_stock}', [StockController::class, 'update']);
     Route::get('/stok/delete/{id_stock}', [StockController::class, 'delete']);
@@ -61,7 +61,7 @@ Route::middleware('auth')->group(function(){
     
     
     Route::get('/keluar', [KeluarController::class, 'index']);
-    Route::post('/keluar', [KeluarController::class, 'tambah']); 
+    Route::post('/keluar', [KeluarController::class, 'kurangi']); 
     Route::get('/keluar/edit/{id_keluar}', [KeluarController::class, 'edit']);
     Route::get('/keluar/update/{id_keluar}', [KeluarController::class, 'update']);
     Route::get('/keluar/delete/{id_keluar}', [KeluarController::class, 'keluar']); 

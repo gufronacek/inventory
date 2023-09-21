@@ -23,29 +23,25 @@
                         <tr>
                             <th>No</th>
                             <th>Nama Barang</th>
-                            <th>Jenis</th>
-                            <th>Merk</th>
-                            <th>Jumlah</th>
-                            <th>Keterangan</th>
+                            <th>Stok Awal</th>
+                            <th>Jumlah Masuk</th>
                             <th>Tanggal</th>
-                            <th>Aksi</th>
+                            {{-- <th>Aksi</th> --}}
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($masuk as $item)
+                        @foreach($data as $item)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $item->nm_barang}}</td>
-                                <td>{{ $item->Jenis}}</td>
-                                <td>{{ $item->merk}}</td>
-                                <td>{{ $item->jumlah }}</td>
-                                <td>{{ $item->keterangan}}</td>
+                                <td>{{ $item->barang->nm_barang}}</td>
+                                <td>{{ $item->stok_awal }}</td>
+                                <td>{{ $item->jumlah}}</td>
                                 <td>{{ $item->tanggal }}</td>
-                                <td>
-                                    {{-- <button type="button" class="btn btn-success">Detail</button> --}}
+                                {{-- <td>
+                                    <button type="button" class="btn btn-success">Detail</button>
                                     <a href="/masuk/edit/{{  $item->id_masuk }}" type="button" class="btn btn-warning" data-toggle="modal" data-target="#myEdit{{ $item->id_masuk }}">Edit</a>
                                     <a href="/masuk/delete/{{ $item->id_masuk }}" type="button" class="btn btn-danger">Delete</a> 
-                                </td>
+                                </td> --}}
                                 
                             </tr>
                         @endforeach                    
@@ -70,19 +66,19 @@
                                         <div class="col-8">
                                             <div class="form-group">
                                                 <label for="">Pilih Nama Barang</label>
-                                                <select name="id_stock" id="id_stock" class="form-control">
+                                                <select name="id_barang" id="id_stock" class="form-control">
                                                     <option selected hidden disabled>Pilih Barang</option>
                                                     @foreach ($pilih as $item)
-                                                        <option value="{{ $item->id_stock }}">{{ $item->nm_barang }}</option>
+                                                        <option value="{{ $item->id_barang }}">{{ $item->nm_barang }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
                                             <div class="form-group">
-                                                <label for="jenis">Jenis</label>
-                                                <input type="text" name="Jenis" class="form-control" id="Jenis" placeholder="Jenis Barang" required>
+                                                <label for="jumlah">jumlah</label>
+                                                <input type="text" name="jumlah" class="form-control" id="jumlah" placeholder="jumlah Barang" required>
                                             </div> 
                                             
-                                            <div class="form-group">
+                                            {{-- <div class="form-group">
                                                 <label for="merk">Merk</label>
                                                 <input type="text" name="merk" class="form-control" id="merk" placeholder="merk Barang" required>
                                             </div> 
@@ -94,12 +90,12 @@
                                             <div class="form-group">
                                                 <label for="keterangan">keterangan</label>
                                                 <input type="text" name="keterangan" class="form-control" id="keterangan" aria-describedby="keteranganlHelp" placeholder="Keterangan">
-                                            </div>
+                                            </div> --}}
                                         </div>
-                                        <div class="col-6">
+                                        {{-- <div class="col-6">
                     
                                             
-                                        </div>
+                                        </div> --}}
                                 
                                     </div>
                             </div>
@@ -116,7 +112,7 @@
                     </div>
                     {{-- endModel --}}
                     {{-- My Edit --}}
-                    @foreach ($masuk as $item)
+                    {{-- @foreach ($data as $item)
                 <div class="modal fade" id="myEdit{{ $item->id_masuk }}">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -133,20 +129,20 @@
                                     @csrf
                                     <div class="row ">
                                         <div class="col-8">
-                                            {{-- <div class="form-group">
+                                            <div class="form-group">
                                                 <label for="">Pilih Barang</label>
                                                 <select name="" id="" class="form-control">
                                                     @foreach ($data as $item)
                                                     <option value="{{ $item->id_barang }}">{{ $item->nm_barang }}</option>
                                                     @endforeach
                                                 </select>
-                                            </div> --}}
-                                            <div class="form-group">
-                                                <label for="nm_barang">Nama Barang</label>
-                                                <input type="text" name="nm_barang" class="form-control" id="nm_barang"
-                                                    placeholder="Nama Barang" value="{{ $item->nm_barang }}">
                                             </div>
                                             <div class="form-group">
+                                                <label for="jumlah">Nama Barang</label>
+                                                <input type="text" name="jumlah" class="form-control" id="jumlah"
+                                                    placeholder="Nama Barang" value="{{ $item->jumlah }}">
+                                            </div> --}}
+                                            {{-- <div class="form-group">
                                                 <label for="jenis">Jenis</label>
                                                 <input type="text" name="Jenis" class="form-control" id="Jenis" placeholder="Jenis Barang" value="{{ $item->Jenis }}">
                                             </div> 
@@ -165,8 +161,8 @@
                                                 <input type="text" name="keterangan" class="form-control" id="keterangan" aria-describedby="keteranganlHelp" placeholder="Jumlah" value="{{ $item->keterangan }}">
                                             </div>
 
-                                        
-                                        </div>
+                                         --}}
+                                        {{-- </div>
                                         <div class="col-6">
                                             
 
@@ -185,7 +181,7 @@
 
                         </div>
                 </div>
-                @endforeach
+                @endforeach --}}
                 {{-- endEdit --}}
             </div>
                 @endsection

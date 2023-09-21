@@ -13,14 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('masuk', function (Blueprint $table) {
-            $table->bigIncrements('id_masuk');
-            $table->integer('id_stock');
-            $table->string('Jenis');
-            $table->string('merk');
-            $table->string('jumlah');
-            $table->string('keterangan');
+        Schema::create('aksi_stok', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->integer('id_barang');
+            $table->integer('stok_awal');
+            $table->integer('jumlah');
             $table->dateTime('tanggal');
+            $table->string('aksi', 6);
             $table->timestamps();
         });
     }

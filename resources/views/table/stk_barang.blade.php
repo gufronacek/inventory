@@ -11,9 +11,9 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal">
+            {{-- <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal">
                 Tambah Barang
-              </button>
+              </button> --}}
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -21,26 +21,20 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>kd_barang</th>
-                            <th>Nama Barang</th>
-                            <th>Jenis</th>
-                            <th>Merk</th>
-                            <th>Stock Barang</th>
-                            <th>Lokasi</th>
+                            <th>Nama barang</th>
+                            <th>Stock</th>
+                            <th>Tanggal</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
                         
-                        @foreach($stock as $item)
+                        @foreach($data as $item)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $item->kd_barang }}</td>
                             <td>{{ $item->nm_barang }}</td>
-                            <td>{{ $item->Jenis }}</td>
-                            <td>{{ $item->merk }}</td>
                             <td>{{ $item->stock }}</td>
-                            <td>{{ $item->lokasi}}</td>
+                            <td>{{ $item->tanggal}}</td>
                             <td>
                                 {{-- <button type="button" class="btn btn-success">Detail</button> --}}
                                 <a href="/stok/edit/{{ $item->id_stock }}" class="btn btn-warning"  data-toggle="modal" data-target="#myEdit{{ $item->id_stock }}">Edit</a>
@@ -53,7 +47,7 @@
                 {{-- my modal --}}
                 <!-- Button trigger modal -->
         <!-- Modal -->
-        <div class="modal fade" id="myModal">
+        {{-- <div class="modal fade" id="myModal">
             <div class="modal-dialog">
               <div class="modal-content">
                 
@@ -68,20 +62,27 @@
                 <!-- Modal body -->
                 <div class="modal-body">
                         @csrf
+                        <div class="form-group">
+                            <label for="">Pilih Nama Barang</label>
+                                <select name="id_barang" id="" class="form-control">
+                                    <option selected hidden disabled>Pilih Barang</option>
+                                        @foreach ($data as $item)
+                                            <option value="{{ $item->id_barang }}">{{ $item->nm_barang }}</option>
+                                        @endforeach
+                                </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="stock">stock Barang</label>
+                            <input type="stock" name="stock" class="form-control" id="stock" aria-describedby="stocklHelp" placeholder="stock" >
+                        </div>
                         
                         <div class="row ">
                             <div class="col-6">
-                                <div class="form-group">
-                                    <label for="kd_barang">Kode Barang</label>
-                                    <input type="text" name="kd_barang" class="form-control" id="kd_barang" placeholder="Kode Barang" >
-                                </div>
-                                <div class="form-group">
-                                    <label for="Jenis">Jenis Barang</label>
-                                    <input type="Jenis" name="Jenis" class="form-control" id="Jenis" aria-describedby="jenislHelp" placeholder="jenis" >
-                                </div>
                                 
-                            </div>
-                            <div class="col-6">
+                                
+                                
+                            </div> --}}
+                            {{-- <div class="col-6">
                                 <div class="form-group">
                                     <label for="nm_barang">Nama Barang</label>
                                     <input type="text" name="nm_barang" class="form-control" id="nm_barang" placeholder="Nama Barang">
@@ -103,19 +104,10 @@
                                     <label for="lokasi">lokasi</label>
                                     <input type="lokasi" name="lokasi" class="form-control" id="lokasi" aria-describedby="lokasilHelp" placeholder="lokasi">
                                 </div>
-                            </div>
+                            </div> --}}
                             
                     
                         </div>
-                        {{-- <div class="form-group">
-                                    <label for="">Pilih Nama Barang</label>
-                                    <select name="id_barang" id="" class="form-control">
-                                        <option selected hidden disabled>Pilih Barang</option>
-                                        @foreach ($data as $item)
-                                            <option value="{{ $item->id_barang }}">{{ $item->nm_barang }}</option>
-                                        @endforeach
-                                    </select>
-                                </div> --}}
                         
                         
                         {{-- {{-- <div class="row">
@@ -126,7 +118,7 @@
                                 </div>
                             </div>
                         </div> --}}
-                </div>
+                {{-- </div>
                 
                 <!-- Modal footer -->
                 <div class="modal-footer">
@@ -137,12 +129,12 @@
                 
               </div>
             </div>
-        </div>  
+        </div>   --}}
         {{-- end modal --}}
 
         {{-- myEdit --}}
                 
-        @foreach($stock as $item)
+        @foreach($data as $item)
             <div class="modal fade" id="myEdit{{ $item->id_stock }}">
                 <div class="modal-dialog">
                 <div class="modal-content">
@@ -172,12 +164,12 @@
                                     </div> --}}
                                     
                                     <div class="form-group">
-                                        <label for="id_barang">Kode Barang</label>
-                                        <input type="text" name="kd_barang" class="form-control" id="id_barang" placeholder="Nama Barang" value="{{ $item->kd_barang }}">
+                                        <label for="nm_barang">Nama Barang</label>
+                                        <input type="text" name="nm_barang" class="form-control" id="nm_barang" placeholder="Nama Barang" value="{{ $item->nm_barang }}">
                                     </div>
                                     <div class="form-group">
-                                        <label for="Jenis">Jenis Barang</label>
-                                        <input type="Jenis" name="Jenis" class="form-control" id="Jenis" aria-describedby="jenislHelp" placeholder="jenis" value="{{ $item->Jenis }}">
+                                        <label for="stock">stock Barang</label>
+                                        <input type="stock" name="stock" class="form-control" id="stock" aria-describedby="stocklHelp" placeholder="stock" value="{{ $item->stock }}">
                                     </div>
                                     
                                 </div>

@@ -12,9 +12,9 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3 mr-5">
-            <button href="" type="button" class="btn btn-danger">
+            {{-- <button href="" type="button" class="btn btn-danger">
                 Data yang hapus
-            </button>
+            </button> --}}
             
             <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">
                 Tambah Barang
@@ -29,6 +29,7 @@
                             <th>no</th>
                             <th>Kode Barang</th>
                             <th>Nama Barang</th>
+                            <th>Stok</th>
                             <th>Deskripsi</th>
                             <th>Aksi</th>
                         </tr>
@@ -40,11 +41,12 @@
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $item->kd_barang }}</td>
                             <td>{{ $item->nm_barang }}</td>
+                            <td>{{ $item->stok }}</td>
                             <td>{{ $item->deskripsi }}</td>
                             <td>
                                 <button type="button" class="btn btn-success">Detail</button>
                                 <a href="/barang/edit/{{ $item->id_barang }}" class="btn btn-warning" data-toggle="modal" data-target="#myEdit">edit</a>
-                                <a href="/barang/delete/{{ $item->id_barang }}" class="btn btn-danger">Delete</a>
+                                {{-- <a href="/barang/delete/{{ $item->id_barang }}" class="btn btn-danger">Delete</a> --}}
 
                             </td>
 
@@ -58,7 +60,7 @@
                 <div class="modal fade" id="myModal">
                     <div class="modal-dialog">
                         <div class="modal-content">
-                            <form method="post" action="/barang/update/{{ $item->id_barang }}" >
+                            <form method="post" action="/barang">
 
                                 <!-- Modal Header -->
                                 <div class="modal-header">
@@ -90,7 +92,6 @@
                                                 <input type="text" name="kd_barang" class="form-control" id="kd_barang"
                                                     placeholder="kode" required>
                                             </div>
-
                                             <div class="form-group">
                                                 <label for="deskripsi">Deskripsi</label>
                                                 <input type="deskripsi" name="deskripsi" class="form-control"
@@ -147,6 +148,11 @@
                                             <label for="nm_barang">Nama Barang</label>
                                             <input type="text" name="nm_barang" class="form-control" id="nm_barang"
                                                 placeholder="Nama Barang" value="{{ $item->nm_barang }}">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="kd_barang">kode</label>
+                                            <input type="text" name="kd_barang" class="form-control" id="kd_barang"
+                                                placeholder="kode" value="{{ $item->kd_barang }}">
                                         </div>
 
                                         <div class="form-group">

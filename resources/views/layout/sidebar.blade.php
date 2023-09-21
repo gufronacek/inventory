@@ -6,7 +6,7 @@
         <div class="sidebar-brand-icon rotate-n-15">
             <i class="fas fa-laugh-wink"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">Stok barang <sup>Tokoh Gudang</sup></div>
+        <div class="sidebar-brand-text mx-3">Stok barang <sup>Gudang</sup></div>
     </a>
 
     <!-- Divider -->
@@ -27,9 +27,9 @@
 
     <!-- Nav Item - Utilities Collapse Menu -->
     <li class="nav-item">
-        <a class="nav-link" href="/stok">
+        <a class="nav-link" href="/barang">
             <i class="fas fa-fw fa-table"></i>
-            <span>Stock Barang</span></a>
+            <span>Barang</span></a>
     </li>
     <hr class="sidebar-divider">
     
@@ -53,7 +53,7 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 
                 {{-- <a class="collapse-item" href="/barang">Barang</a> --}}
-                {{-- <a class="collapse-item" href="/stok">Stok Barang</a> --}}
+                <a class="collapse-item" href="/stok">Stok Barang</a>
                 <a class="collapse-item" href="/masuk">Barang Masuk</a>
                 <a class="collapse-item" href="/keluar">Barang Keluar</a>
             </div>
