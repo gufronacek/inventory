@@ -13,16 +13,33 @@ use Spatie\LaravelIgnition\Recorders\DumpRecorder\DumpHandler;
 
 class MasukController extends Controller
 {
-    public function index()
+    public function index($id = 0)
     {
         // $data = barang::all();   
         // $data = DB::table("aksi_stok")
         // ->join("barang","barang.id_barang","aksi_stok.id_barang")
         // ->where('aksi', 'masuk')->get();
+
+        $barang_ini = null;
+        if($id != 0) {
+            $barang_ini = barang::where('id_barang', $id)->first();
+        };
+
         $pilih = DB::table("barang")->get();
         $data = aksi_stok::with('barang')->where('aksi', 'masuk')->orderBy('tanggal', 'desc')->get();  
 
-        return view('/table.brg_masuk', ['data'=>$data, 'pilih'=>$pilih] );
+        return view('/table.brg_masuk', ['data'=>$data, 'pilih'=>$pilih, 'barang_ini' => $barang_ini] );
+    }
+
+    public function filter(Request $request)
+    {
+        $start_date = $request->start_date;
+        $end_date = $request->end_date;
+        $pilih = DB::table("barang")->get();
+        $masuk = aksi_stok::with('barang')->whereDate('created_at','>=',$start_date)
+                                ->whereDate('created_at','<=',$end_date)
+                                ->get();
+        return view('/table.brg_masuk', ['data'=> $masuk,'pilih'=>$pilih,'barang_ini'=>null]);
     }
 
 
@@ -62,7 +79,20 @@ class MasukController extends Controller
 
         aksi_stok::create($catatan);
 
-        return redirect('/masuk');
+        return redirect('/view_masuk/0');
+    }
+
+    public function scan($kode = '') {
+        if($kode == '') {
+            return redirect('view_masuk/0');
+        };
+
+        $barang = barang::where('kd_barang', $kode)->first();
+
+        if($barang != null) {
+            return redirect('view_masuk/' . $barang->id_barang);
+        };
+        return redirect('view_masuk/0');
     }
 
     // public function edit($id_masuk)

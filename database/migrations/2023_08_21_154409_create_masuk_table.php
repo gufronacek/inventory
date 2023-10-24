@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('aksi_stok', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('kode');
             $table->integer('id_barang');
             $table->integer('stok_awal');
             $table->integer('jumlah');

@@ -15,10 +15,11 @@ return new class extends Migration
     {
         Schema::create('barang', function (Blueprint $table) {
             $table->bigIncrements('id_barang');
-             $table->string('kd_barang');
+            $table->string('kd_barang');
             $table->string('nm_barang');
             $table->integer('stok')->nullable();
-            $table->string('deskripsi');
+            $table->foreignId('id_kategori');
+            $table->foreignId('id_satuan');
             $table->timestamps();
         });
     }

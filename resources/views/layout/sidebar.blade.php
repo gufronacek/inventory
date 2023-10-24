@@ -54,25 +54,25 @@
                 
                 {{-- <a class="collapse-item" href="/barang">Barang</a> --}}
                 {{-- <a class="collapse-item" href="/stok">Stok Barang</a> --}}
-                <a class="collapse-item" href="/masuk">Barang Masuk</a>
-                <a class="collapse-item" href="/keluar">Barang Keluar</a>
+                <a class="collapse-item" href="/view_masuk/0">Barang Masuk</a>
+                <a class="collapse-item" href="/view_keluar/0">Barang Keluar</a>
             </div>
         </div>
     </li>
     <hr class="sidebar-divider">
-    <!-- Nav Item - Pages Collapse Menu -->
+    
+        <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-            aria-expanded="true" aria-controls="collapsePages">
-            <i class="fas fa-fw fa-folder"></i>
-            <span>Pages</span>
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+            aria-expanded="true" aria-controls="collapseTwo">
+            <i class="fas fa-fw fa-cog"></i>
+            <span>Resfrensi</span>
         </a>
-        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">LogIn :</h6>
-                <a class="collapse-item" href="/login">My Profile</a>
-                <a class="collapse-item" href="/register">Register</a>
-                {{-- <a class="collapse-item" href="/forgot">Forgot Password</a> --}}
+                {{-- <h6 class="collapse-header">Custom Components:</h6> --}}
+                <a class="collapse-item" href="/kategori">Kategori</a>
+                <a class="collapse-item" href="/satuan">Satuan</a>
             </div>
         </div>
     </li>
@@ -81,10 +81,10 @@
 
     <div class="sidebar-heading">
         Interface
-    </div>
+    </div> --}}
 
     <!-- Nav Item - Pages Collapse Menu -->
-    <li class="nav-item">
+    {{-- <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
             aria-expanded="true" aria-controls="collapseTwo">
             <i class="fas fa-fw fa-cog"></i>

@@ -20,10 +20,16 @@ class barang extends Model
     {
         return $this->hasMany(barang_masuk::class, 'id_masuk', 'id_masuk');
     }
+    public function kategori()
+    {
+        return $this->belongsTo(kategori::class,'id_kategori');
+    }
+    public function satuan()
+    {
+        return $this->belongsTo(satuan::class,'id_satuan');
+    }
     // public function keluar()
-    // {
-    //     return $this-> hasMany(barang_keluar::class, 'id_keluar', ' id_keluar');
-    // }
+    
 
     
 

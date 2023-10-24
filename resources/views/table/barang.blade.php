@@ -30,22 +30,23 @@
                             <th>Kode Barang</th>
                             <th>Nama Barang</th>
                             <th>Stok</th>
+                            <th>Satuan</th>
                             <th>Deskripsi</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <?php $no=1 ?>
                         @foreach($data as $item)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $item->kd_barang }}</td>
                             <td>{{ $item->nm_barang }}</td>
                             <td>{{ $item->stok }}</td>
-                            <td>{{ $item->deskripsi }}</td>
+                            <td>{{ $item->satuan->satuan }}</td>
+                            <td>{{ $item->kategori->kategori }}</td>
                             <td>
-                                <button type="button" class="btn btn-success">Detail</button>
-                                <a href="/barang/edit/{{ $item->id_barang }}" class="btn btn-warning" data-toggle="modal" data-target="#myEdit">edit</a>
+                                {{-- <button type="button" class="btn btn-success">Detail</button> --}}
+                                <a href="/barang/edit/{{ $item->id_barang }}" class="btn btn-warning" data-toggle="modal" data-target="#myEdit{{ $item->id_barang }}">edit</a>
                                 {{-- <a href="/barang/delete/{{ $item->id_barang }}" class="btn btn-danger">Delete</a> --}}
 
                             </td>
@@ -73,15 +74,7 @@
                                     @csrf
                                     <div class="row ">
                                         <div class="col-8">
-                                            {{-- <div class="form-group">
-                                                <label for="">Pilih Barang</label>
-                                                <select name="" id="" class="form-control">
-                                                    @foreach ($data as $item)
-                                                    <option value="{{ $item->id_barang }}">{{ $item->nm_barang }}
-                                                    </option>
-                                                    @endforeach
-                                                </select>
-                                            </div> --}}
+                                        
                                             <div class="form-group">
                                                 <label for="nm_barang">Nama Barang</label>
                                                 <input type="text" name="nm_barang" class="form-control" id="nm_barang"
@@ -93,11 +86,23 @@
                                                     placeholder="kode" required>
                                             </div>
                                             <div class="form-group">
-                                                <label for="deskripsi">Deskripsi</label>
-                                                <input type="deskripsi" name="deskripsi" class="form-control"
-                                                    id="deskripsi" aria-describedby="deskripsilHelp"
-                                                    placeholder="Deskripsi">
+                                                <label for="id_satuan">Satuan</label>
+                                                <select name="id_satuan" id="id_satuan" class="form-control">
+                                                    @foreach ($pilih as $item)
+                                                    <option value="{{ $item->id}}">{{ $item->satuan }}
+                                                    </option>
+                                                    @endforeach
+                                                </select>
                                             </div>
+                                            <div class="form-group">
+                                                <label for="id_kategori">Kategori</label>
+                                                <select name="id_kategori" id="id_kategori_kategori" class="form-control">
+                                                    @foreach ($pilihkategori as $item)
+                                                    <option value="{{ $item->id}}">{{ $item->kategori }}
+                                                    </option>
+                                                @endforeach
+                                                </select>
+                                            </div>                                    
                                         </div>
                                         <div class="col-6">
 
@@ -120,7 +125,7 @@
 
                 {{-- edit --}}
                 @foreach ($data as $item)
-                <div class="modal fade" id="myEdit">
+                <div class="modal fade" id="myEdit{{ $item->id_barang }}">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <form action="/barang/update/{{ $item->id_barang }}" method="">
@@ -154,12 +159,30 @@
                                             <input type="text" name="kd_barang" class="form-control" id="kd_barang"
                                                 placeholder="kode" value="{{ $item->kd_barang }}">
                                         </div>
-
                                         <div class="form-group">
-                                            <label for="deskripsi">Deskripsi</label>
-                                            <input type="deskripsi" name="deskripsi" class="form-control" id="deskripsi"
-                                                aria-describedby="deskripsilHelp" placeholder="Deskripsi" value="{{ $item->deskripsi }}">
+                                            <label for="id_satuan">Satuan</label>
+                                            <select name="id_satuan" id="id_satuan" class="form-control">
+                                                @foreach ($pilih as $data)
+                                                    <option value="{{ $data->id }}" @if($data->id == $item->id_satuan) selected @endif>{{ $data->satuan }}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
+                                         
+                                        <div class="form-group">
+                                            <label for="id_kategori">Kategori</label>
+                                            <select name="id_kategori" id="id_kategori" class="form-control">
+                                                @foreach ($pilihkategori as $data)
+                                                    <option value="{{ $data->id }}" @if($data->id == $item->id_kategori) selected    
+                                                    @endif>{{ $data->kategori }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        {{-- <div class="form-group">
+                                            <label for="id_kategori">Kategori</label>
+                                            <input type="text" name="id_kategori" class="form-control" id="id_kategori"
+                                                placeholder="kategori" value="{{ $item->kategori->kategori }}">
+                                        </div> --}}
+                                        
                                     </div>
                                     <div class="col-6">
 
@@ -172,7 +195,7 @@
                             <!-- Modal footer -->
                             <div class="modal-footer">
                                 <button class="btn btn-secondary" data-dismiss="modal">Batalkan</button>
-                                <button type="submit" class="btn btn-primary">Tambahkan</button>
+                                <button type="submit" class="btn btn-primary">Edit</button>
                             </div>
                         </form>
 

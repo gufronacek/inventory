@@ -16,9 +16,12 @@ class aksi_stok extends Model
     {
         return $this->belongsTo(barang::class, 'id_barang');
     }
-    // public function barang(){
-    //     return $this->belongsTo(barang::class, 'id_barang');   
-    //    }
+    public function kategori(){
+        return $this->belongsTo(kategori::class, 'id_kategori');   
+       }
+    public function satuan(){
+        return $this->belongsTo(satuan::class, 'id_satuan');   
+       }
 
     
 }

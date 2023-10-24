@@ -11,11 +11,28 @@ use Illuminate\Support\Facades\DB;
 
 class KeluarController extends Controller
 {
-    public function index() {
+    public function index($id = 0) {
+
+        $barang_ini =  null;
+        if ($id !=0) {
+            $barang_ini = barang::where('id_barang',$id)->first();
+        };
+
         $pilih = DB::table("barang")->where('stok', '>', 0)->get();
         $data = aksi_stok::with('barang')->where('aksi', 'keluar')->orderBy('tanggal', 'desc')->get();  
 
-        return view('/table.brg_keluar', ['data'=>$data, 'pilih'=>$pilih] );
+        return view('/table.brg_keluar', ['data'=>$data, 'pilih'=>$pilih,'barang_ini' => $barang_ini]);
+    }
+
+    public function filter(Request $request)
+    {
+        $start_date = $request->start_date;
+        $end_date = $request->end_date;
+        $pilih =  DB::table('barang')->get();
+        $keluar = aksi_stok::with('barang')->whereDate('created_at','>=',$start_date)
+                            ->whereDate('created_at','<=',$end_date)
+                            ->get();
+        return view('/table.brg_keluar', ['data'=>$keluar,'pilih'=>$pilih,'barang_ini'=>null]);
     }
 
     public function kurangi(Request $request)
@@ -28,7 +45,7 @@ class KeluarController extends Controller
         $barang = barang::where('id_barang', $data['id_barang'])->first(); //tabel barang mengambil sesuai id_barang yang di masukkan di form  yang diambil dari pertama
 
         if($data['jumlah'] > $barang->stok) {
-            return redirect('/keluar');
+            return redirect('/view_keluar/0');
 
         };
 
@@ -48,9 +65,22 @@ class KeluarController extends Controller
         );
         aksi_stok::create($catatan);
 
-        return redirect('/keluar');
+        return redirect('/view_keluar/0');
     }
 
+    public function scan($kode = ''){
+        if ($kode == '') {
+            return redirect('/view_keluar/0'); 
+        };
+        $barang = barang::where('kd_barang', $kode)->first();
+         
+        if ($barang != null) {
+            return redirect('view_keluar/0' . $barang->id_barang);
+        };
+        return redirect('/view_keluar/0');
+    }
+
+    
     // public function index()
     // {
     //     $data = barang_keluar::all();

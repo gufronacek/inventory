@@ -23,3 +23,11 @@ editModal.addEventListener('show.bs.modal', function (event) {
     var inputID = editModal.querySelector('.modal-body input#id')
     inputID.value = id
 });
+
+
+
+document.addEventListener('keydown', function (e) {
+    if (e.key == '13') {
+        e.preventDefault();
+    };
+})

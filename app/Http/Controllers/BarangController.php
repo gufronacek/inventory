@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\barang;
+use App\Models\kategori;
+use App\Models\satuan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -10,23 +12,29 @@ class BarangController extends Controller
 {
     public function index()
         {
-            $data = barang::all();
-            return view('/table.barang', ['data'=> $data]);
+            // $data = barang::all();
+            $pilihkategori = kategori::all();
+            $pilih = satuan::all();
+            $data = barang::with('kategori','satuan')->get();
+            return view('/table.barang', ['pilihkategori'=> $pilihkategori,'pilih'=> $pilih,'data'=> $data]);
+
         }
         public function tambah()
             {
                 $data = request()->validate([
-                    'kd_barang'=> 'required',
+                    'kd_barang'=> 'required|unique:barang,kd_barang',
                     'nm_barang'=> 'required',
-                    'deskripsi'=> 'required'
+                    'id_kategori'=> 'required',
+                    'id_satuan'=> 'required',
                 ]);
-                
+            
                 barang::create([
                     'kd_barang'=> $data['kd_barang'],
                     'nm_barang'=> $data['nm_barang'],
                     'stok' => 0,
-                    'deskripsi'=> $data['deskripsi']
-                ]);
+                    'id_kategori'=> $data['id_kategori'],
+                    'id_satuan'=> $data['id_satuan'],
+                ]);                
                 return redirect('/barang');
         
             }
@@ -43,8 +51,21 @@ class BarangController extends Controller
     }
     public function update(Request $request, $id_barang)
     {
-        $data = barang::find($id_barang);
-        $data->update($request->all());
+        $data = request()->validate([
+            'kd_barang'=> 'required',
+            'nm_barang'=> 'required',
+            'id_kategori'=> 'required',
+            'id_satuan'=> 'required',
+        ]);
+    $barang = barang::where('kd_barang',$data['kd_barang'])->first();
+         if ($barang !=null) {
+            if ($barang->id_barang == $id_barang) {
+                barang::where('id_barang',$id_barang)->update($data);  
+            }
+        } else {
+            barang::where('id_barang',$id_barang)->update($data);
+        }
+            
         return redirect('/barang')->with('succes', 'berhasil di update');
     }
     
